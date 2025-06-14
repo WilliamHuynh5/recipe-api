@@ -21,18 +21,19 @@ CONVERSION_TO_GRAMS = {
 
 def convert(quantity: float, from_unit: Unit, to_unit: Unit) -> float:
     in_grams = quantity * CONVERSION_TO_GRAMS[from_unit]
-    return in_grams / CONVERSION_TO_GRAMS[to_unit]
+    return round(in_grams / CONVERSION_TO_GRAMS[to_unit], 2)
 
 
 class Ingredient(BaseModel):
-    id: str;
+    id: str
     name: str
     unit: Unit
     quantity: float
 
-    def to_unit(self, target_unit: Unit) -> "Ingredient":
+    def to_unit(self, target_unit: Unit):
         converted_quantity = convert(self.quantity, self.unit, target_unit)
-        return Ingredient(id=self.id, name=self.name, unit=target_unit, quantity=converted_quantity)
+        self.unit = target_unit
+        self.quantity = converted_quantity
 
-    def reportion(self, multiplier: float) -> "Ingredient":
+    def reportion(self, multiplier: float):
         self.quantity *= multiplier

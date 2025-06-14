@@ -17,16 +17,16 @@ def test_reportion_method():
     )
 
     # Scale from 4 portions to 8 portions (multiplier = 8 / 2 = 2)
-    scaled = recipe.reportion(desiredPortions)
-    assert scaled.portions == desiredPortions
-    assert scaled.id == recipe.id
-    assert scaled.name == recipe.name
+    recipe.reportion(desiredPortions)
+    assert recipe.portions == desiredPortions
+    assert recipe.id == recipe.id
+    assert recipe.name == recipe.name
 
     # Each ingredient quantity should be "multiplied" correctly
-    assert scaled.quantity[0].quantity == pytest.approx(flour_grams * multiplier)
-    assert scaled.quantity[1].quantity == pytest.approx(sugar_grams * multiplier)
-    assert scaled.quantity[0].unit == ingr1.unit
-    assert scaled.quantity[1].unit == ingr2.unit
+    assert recipe.ingredients[0].quantity == pytest.approx(flour_grams * multiplier)
+    assert recipe.ingredients[1].quantity == pytest.approx(sugar_grams * multiplier)
+    assert recipe.ingredients[0].unit == ingr1.unit
+    assert recipe.ingredients[1].unit == ingr2.unit
 
 
 def test_reportion_invalid_portions():

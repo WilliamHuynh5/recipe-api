@@ -13,15 +13,15 @@ def test_convert_function():
 
 def test_to_unit_method():
     ingr = Ingredient(id="ingr-1", name="Sugar", unit=Unit.GRAM, quantity=500)
-    converted = ingr.to_unit(Unit.KILOGRAM)
-    assert converted.unit == Unit.KILOGRAM
-    assert converted.name == ingr.name
-    assert converted.quantity == pytest.approx(0.5)
+    ingr.to_unit(Unit.KILOGRAM)
+    assert ingr.unit == Unit.KILOGRAM
+    assert ingr.name == ingr.name
+    assert ingr.quantity == pytest.approx(0.5)
 
 
 def test_reportion_method():
     ingr = Ingredient(id="ingr-1", name="Salt", unit=Unit.GRAM, quantity=200)
-    scaled = ingr.reportion(3)
-    assert scaled.quantity == 600
-    assert scaled.unit == ingr.unit
-    assert scaled.name == ingr.name
+    ingr.reportion(3)
+    assert ingr.quantity == 600
+    assert ingr.unit == ingr.unit
+    assert ingr.name == ingr.name

@@ -35,6 +35,4 @@ class Ingredient(BaseModel):
         return Ingredient(id=self.id, name=self.name, unit=target_unit, quantity=converted_quantity)
 
     def reportion(self, multiplier: float) -> "Ingredient":
-        return Ingredient(
-            id=self.id, name=self.name, unit=self.unit, quantity=self.quantity * multiplier
-        )
+        self.quantity *= multiplier

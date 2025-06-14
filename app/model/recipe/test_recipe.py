@@ -13,7 +13,7 @@ def test_reportion_method():
     ingr1 = Ingredient(id="ingr-1", name="Flour", unit=Unit.GRAM, quantity=flour_grams)
     ingr2 = Ingredient(id="ingr-1", name="Sugar", unit=Unit.GRAM, quantity=sugar_grams)
     recipe = Recipe(
-        id="rcp-1", name="Cake", portions=defaultPortions, quantity=[ingr1, ingr2]
+        id="rcp-1", name="Cake", portions=defaultPortions, ingredients=[ingr1, ingr2]
     )
 
     # Scale from 4 portions to 8 portions (multiplier = 8 / 2 = 2)
@@ -31,7 +31,7 @@ def test_reportion_method():
 
 def test_reportion_invalid_portions():
     ingr = Ingredient(id="ingr-1", name="Flour", unit=Unit.GRAM, quantity=100)
-    recipe = Recipe(id="rcp-1", name="Cake", portions=4, quantity=[ingr])
+    recipe = Recipe(id="rcp-1", name="Cake", portions=4, ingredients=[ingr])
 
     # Target portions <= 0 should raise ValueError
     with pytest.raises(ValueError):

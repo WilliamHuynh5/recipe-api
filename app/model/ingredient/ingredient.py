@@ -25,15 +25,16 @@ def convert(quantity: float, from_unit: Unit, to_unit: Unit) -> float:
 
 
 class Ingredient(BaseModel):
+    id: str;
     name: str
     unit: Unit
     quantity: float
 
     def to_unit(self, target_unit: Unit) -> "Ingredient":
         converted_quantity = convert(self.quantity, self.unit, target_unit)
-        return Ingredient(name=self.name, unit=target_unit, quantity=converted_quantity)
+        return Ingredient(id=self.id, name=self.name, unit=target_unit, quantity=converted_quantity)
 
     def reportion(self, multiplier: float) -> "Ingredient":
         return Ingredient(
-            name=self.name, unit=self.unit, quantity=self.quantity * multiplier
+            id=self.id, name=self.name, unit=self.unit, quantity=self.quantity * multiplier
         )

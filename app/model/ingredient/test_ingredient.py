@@ -12,7 +12,7 @@ def test_convert_function():
 
 
 def test_to_unit_method():
-    ingr = Ingredient(name="Sugar", unit=Unit.GRAM, quantity=500)
+    ingr = Ingredient(id="ingr-1", name="Sugar", unit=Unit.GRAM, quantity=500)
     converted = ingr.to_unit(Unit.KILOGRAM)
     assert converted.unit == Unit.KILOGRAM
     assert converted.name == ingr.name
@@ -20,7 +20,7 @@ def test_to_unit_method():
 
 
 def test_reportion_method():
-    ingr = Ingredient(name="Salt", unit=Unit.GRAM, quantity=200)
+    ingr = Ingredient(id="ingr-1", name="Salt", unit=Unit.GRAM, quantity=200)
     scaled = ingr.reportion(3)
     assert scaled.quantity == 600
     assert scaled.unit == ingr.unit

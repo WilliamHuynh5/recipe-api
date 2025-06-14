@@ -4,7 +4,7 @@ from app.model.ingredient.ingredient import Ingredient
 
 
 class Recipe(BaseModel):
-    id: int
+    id: str;
     name: str
     portions: float
     quantity: List[Ingredient]

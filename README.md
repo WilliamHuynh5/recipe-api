@@ -5,7 +5,7 @@ During marking, please refer to these following files:
 - `design.txt` - A high level explanation of the design
 - `assumptions.txt` - A list of assumptions made throughout this project
 - `challenges.txt` - A list of technical challenges encountered throughout this project
-- `shortcomings.txt` - A list of code decisions / design choices that should have been changed
+- `shortcomings.txt` - A list of code decisions / design choices that should have been changed, if there was extra time
 
 
 ## 🚀 Project Overview

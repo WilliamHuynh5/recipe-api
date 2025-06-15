@@ -1,20 +1,27 @@
+from pydantic import ValidationError
 import pytest
 from unittest.mock import patch, AsyncMock
-from fastapi import HTTPException
-from app.model.ingredient.ingredient import Unit
-from app.model.params import PaginationParams, FilterOptions, SortOptions, SortOrder, RecipesRequest
+from app.model.params import (
+    PaginationParams,
+    FilterOptions,
+    SortOptions,
+    SortOrder,
+    RecipesRequest,
+)
+from app.model.unit.unit import MassUnit, VolumeUnit
 from app.services.recipe_service import fetch_recipes
+
 
 @pytest.mark.asyncio
 @patch("app.services.recipe_service.database.fetch_all", new_callable=AsyncMock)
 async def test_fetch_recipes_returns_recipes(mock_fetch_all):
-    
+
     mock_fetch_all.return_value = [
         {
             "id": "r1",
             "name": "Test Recipe",
             "portions": 4,
-            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]'
+            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]',
         }
     ]
 
@@ -36,21 +43,24 @@ async def test_fetch_recipes_returns_recipes(mock_fetch_all):
     assert recipe.name == "Test Recipe"
     assert recipe.portions == 4
     assert len(recipe.ingredients) == 1
-    
+
     ingredient = recipe.ingredients[0]
     assert ingredient.name == "Sugar"
     assert ingredient.quantity == 100
-    assert ingredient.unit == Unit.GRAM
+    assert ingredient.unit == MassUnit.GRAM
+
 
 @pytest.mark.asyncio
 @patch("app.services.recipe_service.database.fetch_all", new_callable=AsyncMock)
-async def test_fetch_recipes_with_double_portion_and_mass_unit_conversion(mock_fetch_all):
+async def test_fetch_recipes_with_double_portion_and_mass_unit_conversion(
+    mock_fetch_all,
+):
     mock_fetch_all.return_value = [
         {
             "id": "r1",
             "name": "Test Recipe",
             "portions": 4,
-            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]'
+            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]',
         }
     ]
 
@@ -59,7 +69,7 @@ async def test_fetch_recipes_with_double_portion_and_mass_unit_conversion(mock_f
     sort_opts = None
     # Double the portions of the recipe
     # Also preferred mass unit in Kilograms
-    req = RecipesRequest(desired_portions=8, mass_unit=Unit.KILOGRAM)
+    req = RecipesRequest(desired_portions=8, mass_unit=MassUnit.KILOGRAM)
 
     response = await fetch_recipes(pagination, filter_opts, sort_opts, req)
 
@@ -67,21 +77,24 @@ async def test_fetch_recipes_with_double_portion_and_mass_unit_conversion(mock_f
 
     recipe = response.items[0]
     assert recipe.portions == 8
-    
+
     ingredient = recipe.ingredients[0]
     assert ingredient.name == "Sugar"
     assert ingredient.quantity == 0.2
-    assert ingredient.unit == Unit.KILOGRAM
-    
+    assert ingredient.unit == MassUnit.KILOGRAM
+
+
 @pytest.mark.asyncio
 @patch("app.services.recipe_service.database.fetch_all", new_callable=AsyncMock)
-async def test_fetch_recipes_with_double_portion_and_volume_unit_conversion(mock_fetch_all):
+async def test_fetch_recipes_with_double_portion_and_volume_unit_conversion(
+    mock_fetch_all,
+):
     mock_fetch_all.return_value = [
         {
             "id": "r1",
             "name": "Test Recipe",
             "portions": 4,
-            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "ml"}]'
+            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "ml"}]',
         }
     ]
 
@@ -90,7 +103,7 @@ async def test_fetch_recipes_with_double_portion_and_volume_unit_conversion(mock
     sort_opts = None
     # Double the portions of the recipe
     # Also preferred mass unit in Kilograms
-    req = RecipesRequest(desired_portions=8, volume_unit=Unit.LITER)
+    req = RecipesRequest(desired_portions=8, volume_unit=VolumeUnit.LITER)
 
     response = await fetch_recipes(pagination, filter_opts, sort_opts, req)
 
@@ -98,11 +111,12 @@ async def test_fetch_recipes_with_double_portion_and_volume_unit_conversion(mock
 
     recipe = response.items[0]
     assert recipe.portions == 8
-    
+
     ingredient = recipe.ingredients[0]
     assert ingredient.name == "Sugar"
     assert ingredient.quantity == 0.2
-    assert ingredient.unit == Unit.LITER
+    assert ingredient.unit == VolumeUnit.LITER
+
 
 @pytest.mark.asyncio
 @patch("app.services.recipe_service.database.fetch_all", new_callable=AsyncMock)
@@ -112,18 +126,10 @@ async def test_fetch_recipes_invalid_mass_unit(mock_fetch_all):
             "id": "r1",
             "name": "Test Recipe",
             "portions": 4,
-            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]'
+            "ingredients": '[{"name": "Sugar", "quantity": 100, "unit": "g"}]',
         }
     ]
 
-    pagination = PaginationParams()
-    filter_opts = None
-    sort_opts = None
-    
-     # invalid mass unit
-    req = RecipesRequest(mass_unit=Unit.MILLILITER) 
-
-    with pytest.raises(HTTPException) as exc:
-        await fetch_recipes(pagination, filter_opts, sort_opts, req)
-    assert exc.value.status_code == 400
-    assert "mass_unit must be a mass unit" in exc.value.detail
+    # Expect Pydantic ValidationError on invalid mass_unit at construction time
+    with pytest.raises(ValidationError) as exc_info:
+        RecipesRequest(mass_unit=VolumeUnit.MILLILITER)

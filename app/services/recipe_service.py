@@ -1,10 +1,10 @@
 import json
 from typing import Optional
 from fastapi import HTTPException
-from sqlalchemy import Select, select, desc, asc, func
+from sqlalchemy import Select, select, desc, asc
 from app.database.database import database
 from app.database.recipe_table import recipe_table
-from app.model.ingredient.ingredient import Ingredient, UnitTypes
+from app.model.ingredient.ingredient import Ingredient
 from app.model.params import (
     FilterOptions,
     PaginationParams,
@@ -14,9 +14,12 @@ from app.model.params import (
 )
 from app.model.recipe.recipe import Recipe
 from app.utils.pagination import PaginatedResponse
+
 """
 Fetches the recipes from the database. Has filtering, sorting and pagination.
 """
+
+
 async def get_recipes(
     pagination: PaginationParams,
     filter_opts: Optional[FilterOptions] = None,
@@ -74,7 +77,6 @@ async def fetch_recipes(
     req: Optional[RecipesRequest] = None,
 ) -> PaginatedResponse[Recipe]:
 
-    
     try:
         rows = await get_recipes(pagination, filter_opts, sort_opts)
     except Exception as e:
@@ -93,21 +95,17 @@ async def fetch_recipes(
                 ],
             )
         except Exception as e:
-            raise HTTPException(status_code=500, detail="Failed to parse recipe data")
-            
+            raise HTTPException(
+                status_code=500, detail=f"Failed to parse recipe data: {e}"
+            )
+
         try:
             if req and req.desired_portions is not None:
                 recipe.reportion(req.desired_portions)
             if req and req.mass_unit is not None:
-                if req.mass_unit.unit_type != UnitTypes.MASS:
-                    raise ValueError(f"mass_unit must be a mass unit, got {req.mass_unit}")
                 recipe.reunit(req.mass_unit)
 
             if req and req.volume_unit is not None:
-                if req.volume_unit.unit_type != UnitTypes.VOLUME:
-                    raise ValueError(
-                        f"volume_unit must be a volume unit, got {req.volume_unit}"
-                    )
                 recipe.reunit(req.volume_unit)
             recipes.append(recipe)
         except ValueError as ve:

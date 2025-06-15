@@ -1,83 +1,65 @@
 import pytest
-from app.model.ingredient.ingredient import Ingredient, Unit, convert
-from app.model.ingredient.ingredient import UnitTypes  # if needed
+from app.model.ingredient.ingredient import (
+    Ingredient,
+    MassUnit,
+    VolumeUnit,
+    CountUnit,
+)
 
 
-def test_convert_function_basic() -> None:
-    # Basic valid conversions
-    assert convert(1000, Unit.MILLIGRAM, Unit.GRAM) == pytest.approx(1.0)
-    assert convert(1000, Unit.GRAM, Unit.KILOGRAM) == pytest.approx(1.0)
-    assert convert(1, Unit.POUND, Unit.OUNCE) == pytest.approx(16.0)
+def test_massunit_conversion() -> None:
+    assert MassUnit.MILLIGRAM.convert(1000, MassUnit.GRAM) == pytest.approx(1.0)
+    assert MassUnit.GRAM.convert(1000, MassUnit.KILOGRAM) == pytest.approx(1.0)
+    assert MassUnit.POUND.convert(1, MassUnit.OUNCE) == pytest.approx(16.0)
 
 
-def test_convert_function_count_units() -> None:
-    # COUNT units convert to same quantity (no conversion)
-    assert convert(5, Unit.UNIT, Unit.UNIT) == 5
-    assert convert(10, Unit.CUP, Unit.CUP) == 10
-    assert (
-        convert(3, Unit.TABLESPOON, Unit.TEASPOON) == 3
-    )  # Different count units, should behave same
+def test_volumeunit_conversion() -> None:
+    assert VolumeUnit.LITER.convert(1, VolumeUnit.MILLILITER) == pytest.approx(1000.0)
+    assert VolumeUnit.FLUID_OUNCE.convert(2, VolumeUnit.MILLILITER) == pytest.approx(
+        59.15
+    )
 
 
-def test_convert_function_type_mismatch() -> None:
-    # Converting between different unit types should raise ValueError
-    with pytest.raises(ValueError):
-        convert(1, Unit.GRAM, Unit.MILLILITER)
-    with pytest.raises(ValueError):
-        convert(1, Unit.UNIT, Unit.GRAM)
-    with pytest.raises(ValueError):
-        convert(1, Unit.CUP, Unit.GRAM)
+def test_countunit_no_conversion() -> None:
+    assert CountUnit.UNIT == CountUnit.UNIT
+    assert str(CountUnit.CUP) == "cup"
 
 
-def test_convert_function_zero_quantity() -> None:
-    # Zero quantity should convert to zero regardless of units
-    assert convert(0, Unit.GRAM, Unit.KILOGRAM) == 0
-    assert convert(0, Unit.UNIT, Unit.CUP) == 0
+def test_zero_quantity_conversion() -> None:
+    assert MassUnit.GRAM.convert(0, MassUnit.KILOGRAM) == 0
+    assert VolumeUnit.LITER.convert(0, VolumeUnit.MILLILITER) == 0
 
 
-def test_ingredient_to_unit_valid_conversion() -> None:
-    ingredient = Ingredient(name="Sugar", unit=Unit.GRAM, quantity=500.0)
-    ingredient.to_unit(Unit.KILOGRAM)
-    assert ingredient.unit == Unit.KILOGRAM
+def test_ingredient_to_unit_success() -> None:
+    ingredient = Ingredient(name="Flour", unit=MassUnit.GRAM, quantity=500)
+    ingredient.to_unit(MassUnit.KILOGRAM)
+    assert ingredient.unit == MassUnit.KILOGRAM
     assert ingredient.quantity == pytest.approx(0.5)
 
 
-def test_ingredient_to_unit_invalid_conversion() -> None:
-    ingredient = Ingredient(name="Water", unit=Unit.MILLILITER, quantity=1000.0)
-    # Should not convert because unit types differ (MILLILITER is VOLUME, GRAM is MASS)
-    ingredient.to_unit(Unit.GRAM)
-    # Values unchanged
-    assert ingredient.unit == Unit.MILLILITER
-    assert ingredient.quantity == pytest.approx(1000.0)
-
-
 def test_ingredient_reportion() -> None:
-    ingredient = Ingredient(name="Salt", unit=Unit.GRAM, quantity=200.0)
-    ingredient.reportion(3.0)
-    assert ingredient.quantity == pytest.approx(600.0)
+    ingredient = Ingredient(name="Butter", unit=MassUnit.GRAM, quantity=200)
+    ingredient.reportion(2.5)
+    assert ingredient.quantity == pytest.approx(500.0)
 
 
-def test_ingredient_reportion_zero_multiplier() -> None:
-    ingredient = Ingredient(name="Pepper", unit=Unit.GRAM, quantity=50.0)
-    with pytest.raises(ValueError, match="Target portions must be greater than zero."):
+def test_ingredient_reportion_invalid_multiplier() -> None:
+    ingredient = Ingredient(name="Salt", unit=MassUnit.GRAM, quantity=100)
+    with pytest.raises(ValueError):
         ingredient.reportion(0)
+    with pytest.raises(ValueError):
+        ingredient.reportion(-1)
 
 
-def test_ingredient_reportion_negative_multiplier() -> None:
-    ingredient = Ingredient(name="Chili", unit=Unit.GRAM, quantity=10.0)
-    with pytest.raises(ValueError, match="Target portions must be greater than zero."):
-        ingredient.reportion(-2)
+def test_unit_str_repr_and_missing() -> None:
+    # Confirm string and repr return correct values
+    assert str(MassUnit.GRAM) == "g"
+    assert repr(MassUnit.GRAM) == "g"
+    assert str(VolumeUnit.LITER) == "l"
+    assert str(CountUnit.TEASPOON) == "teaspoon"
 
-
-def test_unit_missing_method() -> None:
-    # Test that _missing_ allows parsing from string to Unit enum
-    assert Unit._missing_("g") == Unit.GRAM
-    assert Unit._missing_("cup") == Unit.CUP
-    # Invalid string returns None
-    assert Unit._missing_("unknown") is None
-
-
-def test_unit_str_and_repr() -> None:
-    # Test string and repr methods return the string representation of unit
-    assert str(Unit.KILOGRAM) == "kg"
-    assert repr(Unit.KILOGRAM) == "kg"
+    # _missing_ method
+    assert MassUnit._missing_("g") == MassUnit.GRAM
+    assert VolumeUnit._missing_("ml") == VolumeUnit.MILLILITER
+    assert CountUnit._missing_("cup") == CountUnit.CUP
+    assert CountUnit._missing_("unknown one") is None

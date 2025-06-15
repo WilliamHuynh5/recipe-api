@@ -2,7 +2,7 @@ from typing import TypeVar, Optional
 from pydantic import BaseModel
 from enum import Enum
 
-from app.model.ingredient.ingredient import Unit
+from app.model.unit.unit import MassUnit, VolumeUnit
 
 """
 Request and parameter models for recipe and ingredient API endpoints.
@@ -36,12 +36,12 @@ class FilterOptions(BaseModel):
 
 class RecipesRequest(BaseModel):
     desired_portions: Optional[float] = None
-    mass_unit: Optional[Unit] = None
-    volume_unit: Optional[Unit] = None
+    mass_unit: Optional[MassUnit] = None
+    volume_unit: Optional[VolumeUnit] = None
 
 
 class IngredientsRequest(BaseModel):
     recipe_id: str
     desired_portions: Optional[float] = None
-    mass_unit: Optional[Unit] = None
-    volume_unit: Optional[Unit] = None
+    mass_unit: Optional[MassUnit] = None
+    volume_unit: Optional[VolumeUnit] = None

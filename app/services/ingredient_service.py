@@ -5,7 +5,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from app.database.database import database
 from app.database.recipe_table import recipe_table
-from app.model.ingredient.ingredient import Ingredient, UnitTypes
+from app.model.ingredient.ingredient import Ingredient
 from app.model.params import IngredientsRequest
 from app.model.recipe.recipe import Recipe
 
@@ -14,6 +14,8 @@ import logging
 """
 Fetches the recipe row from the database by its ID.
 """
+
+
 async def get_recipe_row_by_id(recipe_id: str) -> Optional[dict]:
     query = select(recipe_table).where(recipe_table.c.id == recipe_id)
     return await database.fetch_one(query)
@@ -39,6 +41,8 @@ Raises:
 Returns:
     List[Ingredient]: A list of Ingredient models representing the processed ingredients for the recipe.
 """
+
+
 async def fetch_ingredients(req: IngredientsRequest) -> List[Ingredient]:
     if not req.recipe_id:
         raise HTTPException(status_code=400, detail="Recipe ID must be provided")
@@ -71,15 +75,9 @@ async def fetch_ingredients(req: IngredientsRequest) -> List[Ingredient]:
         if req.desired_portions is not None:
             recipe.reportion(req.desired_portions)
         if req.mass_unit is not None:
-            if req.mass_unit.unit_type != UnitTypes.MASS:
-                raise ValueError(f"mass_unit must be a mass unit, got {req.mass_unit}")
             recipe.reunit(req.mass_unit)
 
         if req.volume_unit is not None:
-            if req.volume_unit.unit_type != UnitTypes.VOLUME:
-                raise ValueError(
-                    f"volume_unit must be a volume unit, got {req.volume_unit}"
-                )
             recipe.reunit(req.volume_unit)
 
     except ValueError as ve:

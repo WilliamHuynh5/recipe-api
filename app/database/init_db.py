@@ -1,10 +1,11 @@
-import json
 import asyncio
-from app.database.recipe_table import recipe_table
+import json
 from app.database.database import database, metadata, engine
+from app.database.recipe_table import recipe_table
 
 
 async def seed_data():
+    metadata.drop_all(engine)
     metadata.create_all(engine)
 
     with open("app/database/mock_data.json") as f:

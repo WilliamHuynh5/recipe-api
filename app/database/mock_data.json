@@ -5,22 +5,24 @@
         "portions": 4,
         "ingredients": [
             {
-                "id": "i1",
                 "name": "Flour",
                 "unit": "g",
                 "quantity": 200
             },
             {
-                "id": "i2",
-                "name": "Milk Powder",
-                "unit": "g",
-                "quantity": 100
+                "name": "Milk",
+                "unit": "ml",
+                "quantity": 300
             },
             {
-                "id": "i3",
                 "name": "Butter",
-                "unit": "g",
-                "quantity": 50
+                "unit": "tablespoon",
+                "quantity": 3
+            },
+            {
+                "name": "Vanilla Extract",
+                "unit": "teaspoon",
+                "quantity": 1
             }
         ]
     },
@@ -30,138 +32,153 @@
         "portions": 2,
         "ingredients": [
             {
-                "id": "i4",
                 "name": "Chicken Breast",
                 "unit": "kg",
-                "quantity": 0.5
+                "quantity": 0.6
             },
             {
-                "id": "i5",
                 "name": "Olive Oil",
-                "unit": "oz",
-                "quantity": 1
+                "unit": "tablespoon",
+                "quantity": 2
+            },
+            {
+                "name": "Garlic",
+                "unit": "g",
+                "quantity": 15
             }
         ]
     },
     {
         "id": "r3",
-        "name": "Salad Dressing",
+        "name": "Tomato Soup",
         "portions": 3,
         "ingredients": [
             {
-                "id": "i6",
-                "name": "Olive Oil",
-                "unit": "oz",
+                "name": "Tomatoes",
+                "unit": "g",
+                "quantity": 500
+            },
+            {
+                "name": "Vegetable Broth",
+                "unit": "cup",
                 "quantity": 2
             },
             {
-                "id": "i7",
-                "name": "Vinegar",
-                "unit": "oz",
-                "quantity": 1
-            },
-            {
-                "id": "i8",
-                "name": "Salt",
-                "unit": "mg",
-                "quantity": 500
+                "name": "Cream",
+                "unit": "ml",
+                "quantity": 100
             }
         ]
     },
     {
         "id": "r4",
-        "name": "Spaghetti Bolognese",
-        "portions": 4,
-        "ingredients": [
-            {
-                "id": "i9",
-                "name": "Spaghetti",
-                "unit": "g",
-                "quantity": 250
-            },
-            {
-                "id": "i10",
-                "name": "Ground Beef",
-                "unit": "g",
-                "quantity": 500
-            },
-            {
-                "id": "i11",
-                "name": "Tomato Sauce",
-                "unit": "g",
-                "quantity": 300
-            }
-        ]
-    },
-    {
-        "id": "r5",
-        "name": "Roasted Vegetables",
-        "portions": 3,
-        "ingredients": [
-            {
-                "id": "i12",
-                "name": "Carrots",
-                "unit": "g",
-                "quantity": 200
-            },
-            {
-                "id": "i13",
-                "name": "Potatoes",
-                "unit": "g",
-                "quantity": 300
-            },
-            {
-                "id": "i14",
-                "name": "Olive Oil",
-                "unit": "oz",
-                "quantity": 2
-            }
-        ]
-    },
-    {
-        "id": "r6",
         "name": "Beef Stew",
         "portions": 5,
         "ingredients": [
             {
-                "id": "i15",
                 "name": "Beef Chunks",
                 "unit": "lb",
-                "quantity": 2
+                "quantity": 3
             },
             {
-                "id": "i16",
                 "name": "Potatoes",
                 "unit": "g",
                 "quantity": 400
             },
             {
-                "id": "i17",
                 "name": "Carrots",
                 "unit": "g",
                 "quantity": 150
+            },
+            {
+                "name": "Onion",
+                "unit": "g",
+                "quantity": 100
+            }
+        ]
+    },
+    {
+        "id": "r5",
+        "name": "Lemonade",
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Lemon Juice",
+                "unit": "ml",
+                "quantity": 150
+            },
+            {
+                "name": "Water",
+                "unit": "l",
+                "quantity": 1
+            },
+            {
+                "name": "Sugar Syrup",
+                "unit": "tablespoon",
+                "quantity": 4
+            }
+        ]
+    },
+    {
+        "id": "r6",
+        "name": "Iced Coffee",
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Brewed Coffee",
+                "unit": "floz",
+                "quantity": 8
+            },
+            {
+                "name": "Milk",
+                "unit": "ml",
+                "quantity": 120
+            },
+            {
+                "name": "Ice Cubes",
+                "unit": "unit",
+                "quantity": 5
             }
         ]
     },
     {
         "id": "r7",
-        "name": "Chicken Soup",
-        "portions": 6,
+        "name": "Roasted Vegetables",
+        "portions": 3,
         "ingredients": [
             {
-                "id": "i18",
-                "name": "Chicken",
-                "unit": "kg",
-                "quantity": 1.2
-            },
-            {
-                "id": "i19",
                 "name": "Carrots",
                 "unit": "g",
                 "quantity": 200
             },
             {
-                "id": "i20",
+                "name": "Potatoes",
+                "unit": "g",
+                "quantity": 300
+            },
+            {
+                "name": "Olive Oil",
+                "unit": "tablespoon",
+                "quantity": 2
+            }
+        ]
+    },
+    {
+        "id": "r8",
+        "name": "Chicken Soup",
+        "portions": 6,
+        "ingredients": [
+            {
+                "name": "Chicken",
+                "unit": "kg",
+                "quantity": 1.2
+            },
+            {
+                "name": "Carrots",
+                "unit": "g",
+                "quantity": 200
+            },
+            {
                 "name": "Celery",
                 "unit": "g",
                 "quantity": 150
@@ -169,77 +186,24 @@
         ]
     },
     {
-        "id": "r8",
+        "id": "r9",
         "name": "Chocolate Cake",
         "portions": 8,
         "ingredients": [
             {
-                "id": "i21",
                 "name": "Flour",
                 "unit": "g",
                 "quantity": 300
             },
             {
-                "id": "i22",
                 "name": "Sugar",
                 "unit": "g",
                 "quantity": 200
             },
             {
-                "id": "i23",
                 "name": "Cocoa Powder",
                 "unit": "g",
                 "quantity": 100
-            }
-        ]
-    },
-    {
-        "id": "r9",
-        "name": "Fruit Smoothie",
-        "portions": 2,
-        "ingredients": [
-            {
-                "id": "i24",
-                "name": "Banana",
-                "unit": "g",
-                "quantity": 150
-            },
-            {
-                "id": "i25",
-                "name": "Strawberries",
-                "unit": "g",
-                "quantity": 100
-            },
-            {
-                "id": "i26",
-                "name": "Yogurt",
-                "unit": "g",
-                "quantity": 200
-            }
-        ]
-    },
-    {
-        "id": "r10",
-        "name": "Oatmeal",
-        "portions": 1,
-        "ingredients": [
-            {
-                "id": "i27",
-                "name": "Oats",
-                "unit": "g",
-                "quantity": 50
-            },
-            {
-                "id": "i28",
-                "name": "Milk Powder",
-                "unit": "g",
-                "quantity": 30
-            },
-            {
-                "id": "i29",
-                "name": "Honey",
-                "unit": "g",
-                "quantity": 20
             }
         ]
     }

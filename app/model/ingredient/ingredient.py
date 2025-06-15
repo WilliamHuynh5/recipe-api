@@ -23,10 +23,13 @@ Currently, it defines three types:
 
 Units of different types are not convertible to each other.
 """
+
+
 class UnitTypes(str, Enum):
     MASS = "mass"
     VOLUME = "volume"
     COUNT = "count"
+
 
 """
 Enum representing measurement units used for ingredients.
@@ -42,6 +45,8 @@ This enum supports:
 - Properties for accessing the unit type and conversion factor,
 - A custom Pydantic-compatible `_missing_` method to parse unit strings back to enum members.
 """
+
+
 class Unit(Enum):
     def __str__(self):
         return self.value
@@ -115,6 +120,8 @@ Notes:
     - If the unit type is COUNT (e.g., discrete items), the quantity is returned unchanged.
     - Conversion is done via a base unit using `conversion_factor` attributes on units.
 """
+
+
 def convert(quantity: float, from_unit: Unit, to_unit: Unit) -> float:
     if from_unit.unit_type != to_unit.unit_type:
         raise ValueError(
@@ -152,8 +159,9 @@ Config:
     use_enum_values (bool): When serialising, enums are not replaced by their values.
     json_encoders (dict): Custom JSON encoder for Unit to serialize it as string.
 """
+
+
 class Ingredient(BaseModel):
-    id: str
     name: str
     unit: Unit
     quantity: float

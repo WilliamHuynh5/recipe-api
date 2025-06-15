@@ -22,6 +22,8 @@ Methods:
         Adjusts ingredient quantities proportionally to match the target number of portions.
         Raises ValueError if the target portions is zero or negative.
 """
+
+
 class Recipe(BaseModel):
     id: str
     name: str

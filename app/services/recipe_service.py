@@ -39,6 +39,8 @@ Raises:
 Returns:
     PaginatedResponse[Recipe]: A paginated list of Recipe models matching the query with applied adjustments.
 """
+
+
 async def fetch_recipes(
     pagination: PaginationParams = PaginationParams(),
     filter_opts: Optional[FilterOptions] = None,

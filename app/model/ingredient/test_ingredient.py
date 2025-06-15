@@ -36,16 +36,14 @@ def test_convert_function_zero_quantity() -> None:
 
 
 def test_ingredient_to_unit_valid_conversion() -> None:
-    ingredient = Ingredient(id="ingr-1", name="Sugar", unit=Unit.GRAM, quantity=500.0)
+    ingredient = Ingredient(name="Sugar", unit=Unit.GRAM, quantity=500.0)
     ingredient.to_unit(Unit.KILOGRAM)
     assert ingredient.unit == Unit.KILOGRAM
     assert ingredient.quantity == pytest.approx(0.5)
 
 
 def test_ingredient_to_unit_invalid_conversion() -> None:
-    ingredient = Ingredient(
-        id="ingr-2", name="Water", unit=Unit.MILLILITER, quantity=1000.0
-    )
+    ingredient = Ingredient(name="Water", unit=Unit.MILLILITER, quantity=1000.0)
     # Should not convert because unit types differ (MILLILITER is VOLUME, GRAM is MASS)
     ingredient.to_unit(Unit.GRAM)
     # Values unchanged
@@ -54,19 +52,19 @@ def test_ingredient_to_unit_invalid_conversion() -> None:
 
 
 def test_ingredient_reportion() -> None:
-    ingredient = Ingredient(id="ingr-3", name="Salt", unit=Unit.GRAM, quantity=200.0)
+    ingredient = Ingredient(name="Salt", unit=Unit.GRAM, quantity=200.0)
     ingredient.reportion(3.0)
     assert ingredient.quantity == pytest.approx(600.0)
 
 
 def test_ingredient_reportion_zero_multiplier() -> None:
-    ingredient = Ingredient(id="ingr-4", name="Pepper", unit=Unit.GRAM, quantity=50.0)
+    ingredient = Ingredient(name="Pepper", unit=Unit.GRAM, quantity=50.0)
     with pytest.raises(ValueError, match="Target portions must be greater than zero."):
         ingredient.reportion(0)
 
 
 def test_ingredient_reportion_negative_multiplier() -> None:
-    ingredient = Ingredient(id="ingr-5", name="Chili", unit=Unit.GRAM, quantity=10.0)
+    ingredient = Ingredient(name="Chili", unit=Unit.GRAM, quantity=10.0)
     with pytest.raises(ValueError, match="Target portions must be greater than zero."):
         ingredient.reportion(-2)
 

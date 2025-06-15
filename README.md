@@ -1,6 +1,11 @@
 # 🧑‍🍳 Recipe API – Setup & Running Guide
 
-This project is a **Recipe API** built with **FastAPI** and uses **SQLite** as its database. The API allows users to manage recipes by creating, reading, updating, and deleting recipe data including ingredients and portions. This guide will help you set up the project environment, seed the database with initial data, and run the API server locally.
+This project is a **Recipe API** built with **FastAPI** and uses **SQLite** as its database. 
+During marking, please refer to these following files:
+- `assumptions.txt`
+- `challenges.txt`
+- `shortcomings.txt`
+- `design.txt`
 
 ---
 

@@ -1,0 +1,29 @@
+Overall I am quite decently happy with my design. I have placed an emphasis on code cleanliness,
+modularity and also extensibility.
+
+1. Clear Separation of Classes and Inheritance
+    The core entities — units of measurement — are organised around a neat inheritance hierarchy. A base Unit class 
+    handles common behaviour like conversion logic and unit lookup, which means less duplication and more reuse. 
+    Specific subclasses such as MassUnit, VolumeUnit, and CountUnit extend this base, each defining their own units and 
+    unique behaviours. This setup is highly extensible — new units or measurement types can be added easily without
+    touching the existing code.
+    
+    Additionally, each class comes with its own set of unit tests that are independent
+
+2. Encapsulation of Conversion Logic
+    Each unit class takes care of its own conversion logic, so converting between units is as simple as calling .convert(). 
+    This keeps things tidy and means users of the code don’t need to worry about the nitty-gritty of conversions.
+
+3. Support for Pagination, Sorting and Filtering
+    The backend supports pagination, sorting and filtering to handle data more flexibly and efficiently. 
+    This makes it easier to work with larger datasets, especially as more recipes are added and improves overall performance.
+
+4. Modular Service Layers
+    All the business logic is wrapped up in dedicated service modules — ingredient_service and recipe_service. 
+    These manage database queries and error handling, keeping the "logic" parts separate from the rest of the app. 
+    This makes the code easier to navigate, debug and maintain. As this expands I can see myself creating directories
+    for `ingredient_service` and `recipe_service`, where the files inside are more individual service functions, however
+    for the sake of this assignment, that is likely out of scope.
+
+5. Database
+    As a bit of a stretch goal, I integrated a SQLite database to more closely mimic a real-world infrastructure. 

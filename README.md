@@ -4,7 +4,6 @@ This project is a **Recipe API** built with **FastAPI** and uses **SQLite** as i
 During marking, please refer to these following files:
 - `assumptions.txt` - A list of assumptions made throughout this project
 - `challenges.txt` - A list of technical challenges encountered throughout this project
-- `shortcomings.txt` - A list of code decisions / design choices that should have been changed
 - `design.txt` - A high level explanation of the design
 
 

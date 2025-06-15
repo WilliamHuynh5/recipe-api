@@ -1,47 +1,71 @@
-# 🧑‍🍳 Recipe API – Running & Seeding the Database
+# 🧑‍🍳 Recipe API – Setup & Running Guide
 
-This guide explains how to set up, run, and seed the database for the Recipe API project using FastAPI and SQLite.
+This project is a **Recipe API** built with **FastAPI** and uses **SQLite** as its database. The API allows users to manage recipes by creating, reading, updating, and deleting recipe data including ingredients and portions. This guide will help you set up the project environment, seed the database with initial data, and run the API server locally.
 
 ---
 
-## 📦 Prerequisites
+## 🚀 Project Overview
 
-- Python 3.9+
+The Recipe API provides a simple and efficient way to manage recipe information through RESTful endpoints. It is designed for easy local development and testing with FastAPI’s automatic documentation and hot-reload capabilities.
+
+---
+
+## 🛠️ Setup Instructions
+
+### 1. Prerequisites
+
+Ensure you have the following installed:
+
+- Python 3.9 or higher  
 - `pip` package manager
+
 ---
 
-## 🔧 1. Create a Virtual Environment
+### 2. Create a Virtual Environment
 
-Create virtual environment:
+Create an isolated Python environment to manage dependencies:
 
-```bash
- python3 -m venv venv  
-```
+`python3 -m venv venv`
 
-## 🔧 2. Active the Virtual Environment
+---
 
-Activate virtual environment. This should create a `venv` terminal
+### 3. Activate the Virtual Environment
 
-```bash
-source venv/bin/activate
-```
+Activate your virtual environment:
 
-## 📥 3. Install Dependencies
+`source venv/bin/activate`
 
-In the `venv` terminal, install the required packages:
+> For Windows, use: `venv\Scripts\activate`
 
-```
-pip install -r requirements.txt
-```
+---
 
-## 📥 4. Seed the database
+### 4. Install Dependencies
 
-```
-python3 -m app.database.init_db
-```
+Install the required Python packages:
 
-## 🚀 5. Run the Server
+`pip install -r requirements.txt`
 
-```
-uvicorn app.main:app --reload
-```
+---
+
+### 5. Seed the Database
+
+Initialize and seed the SQLite database with starter data:
+
+`python3 -m app.database.init_db`
+
+---
+
+### 6. Run the API Server
+
+Start the FastAPI server with auto-reload enabled:
+
+`uvicorn app.main:app --reload`
+
+The API will be available at `http://127.0.0.1:8000`
+
+Try out this sample route!
+
+http://127.0.0.1:8000/ingredients?recipe_id=r2&desired_portions=10
+
+---
+

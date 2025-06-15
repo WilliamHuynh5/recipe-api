@@ -1,0 +1,5 @@
+1. Source of truth for units. Should the backend handle conversion or the frontend?
+    -> If the backend, that requires each request to include a preferred
+       metric of measurement. 
+       
+2. Learning SQL Alchemy and SQL Lite

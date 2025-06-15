@@ -1,0 +1,210 @@
+[
+    {
+        "id": "r1",
+        "name": "Pancakes",
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Flour",
+                "unit": "g",
+                "quantity": 200
+            },
+            {
+                "name": "Milk",
+                "unit": "ml",
+                "quantity": 300
+            },
+            {
+                "name": "Butter",
+                "unit": "tablespoon",
+                "quantity": 3
+            },
+            {
+                "name": "Vanilla Extract",
+                "unit": "teaspoon",
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": "r2",
+        "name": "Grilled Chicken",
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Chicken Breast",
+                "unit": "kg",
+                "quantity": 0.6
+            },
+            {
+                "name": "Olive Oil",
+                "unit": "tablespoon",
+                "quantity": 2
+            },
+            {
+                "name": "Garlic",
+                "unit": "g",
+                "quantity": 15
+            }
+        ]
+    },
+    {
+        "id": "r3",
+        "name": "Tomato Soup",
+        "portions": 3,
+        "ingredients": [
+            {
+                "name": "Tomatoes",
+                "unit": "g",
+                "quantity": 500
+            },
+            {
+                "name": "Vegetable Broth",
+                "unit": "cup",
+                "quantity": 2
+            },
+            {
+                "name": "Cream",
+                "unit": "ml",
+                "quantity": 100
+            }
+        ]
+    },
+    {
+        "id": "r4",
+        "name": "Beef Stew",
+        "portions": 5,
+        "ingredients": [
+            {
+                "name": "Beef Chunks",
+                "unit": "lb",
+                "quantity": 3
+            },
+            {
+                "name": "Potatoes",
+                "unit": "g",
+                "quantity": 400
+            },
+            {
+                "name": "Carrots",
+                "unit": "g",
+                "quantity": 150
+            },
+            {
+                "name": "Onion",
+                "unit": "g",
+                "quantity": 100
+            }
+        ]
+    },
+    {
+        "id": "r5",
+        "name": "Lemonade",
+        "portions": 4,
+        "ingredients": [
+            {
+                "name": "Lemon Juice",
+                "unit": "ml",
+                "quantity": 150
+            },
+            {
+                "name": "Water",
+                "unit": "l",
+                "quantity": 1
+            },
+            {
+                "name": "Sugar Syrup",
+                "unit": "tablespoon",
+                "quantity": 4
+            }
+        ]
+    },
+    {
+        "id": "r6",
+        "name": "Iced Coffee",
+        "portions": 2,
+        "ingredients": [
+            {
+                "name": "Brewed Coffee",
+                "unit": "floz",
+                "quantity": 8
+            },
+            {
+                "name": "Milk",
+                "unit": "ml",
+                "quantity": 120
+            },
+            {
+                "name": "Ice Cubes",
+                "unit": "unit",
+                "quantity": 5
+            }
+        ]
+    },
+    {
+        "id": "r7",
+        "name": "Roasted Vegetables",
+        "portions": 3,
+        "ingredients": [
+            {
+                "name": "Carrots",
+                "unit": "g",
+                "quantity": 200
+            },
+            {
+                "name": "Potatoes",
+                "unit": "g",
+                "quantity": 300
+            },
+            {
+                "name": "Olive Oil",
+                "unit": "tablespoon",
+                "quantity": 2
+            }
+        ]
+    },
+    {
+        "id": "r8",
+        "name": "Chicken Soup",
+        "portions": 6,
+        "ingredients": [
+            {
+                "name": "Chicken",
+                "unit": "kg",
+                "quantity": 1.2
+            },
+            {
+                "name": "Carrots",
+                "unit": "g",
+                "quantity": 200
+            },
+            {
+                "name": "Celery",
+                "unit": "g",
+                "quantity": 150
+            }
+        ]
+    },
+    {
+        "id": "r9",
+        "name": "Chocolate Cake",
+        "portions": 8,
+        "ingredients": [
+            {
+                "name": "Flour",
+                "unit": "g",
+                "quantity": 300
+            },
+            {
+                "name": "Sugar",
+                "unit": "g",
+                "quantity": 200
+            },
+            {
+                "name": "Cocoa Powder",
+                "unit": "g",
+                "quantity": 100
+            }
+        ]
+    }
+]

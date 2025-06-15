@@ -1,5 +1,5 @@
 import json
-from typing import List
+from typing import List, Optional
 
 from fastapi import HTTPException
 from sqlalchemy import select
@@ -9,11 +9,15 @@ from app.model.ingredient.ingredient import Ingredient, UnitTypes
 from app.model.params import IngredientsRequest
 from app.model.recipe.recipe import Recipe
 
-
-from typing import List
-from fastapi import HTTPException
-import json
 import logging
+
+"""
+Fetches the recipe row from the database by its ID.
+"""
+async def get_recipe_row_by_id(recipe_id: str) -> Optional[dict]:
+    query = select(recipe_table).where(recipe_table.c.id == recipe_id)
+    return await database.fetch_one(query)
+
 
 """
 Retrieve and process the list of ingredients for a given recipe based on the request parameters.
@@ -35,15 +39,12 @@ Raises:
 Returns:
     List[Ingredient]: A list of Ingredient models representing the processed ingredients for the recipe.
 """
-
-
 async def fetch_ingredients(req: IngredientsRequest) -> List[Ingredient]:
     if not req.recipe_id:
         raise HTTPException(status_code=400, detail="Recipe ID must be provided")
 
     try:
-        query = select(recipe_table).where(recipe_table.c.id == req.recipe_id)
-        row = await database.fetch_one(query)
+        row = await get_recipe_row_by_id(req.recipe_id)
     except Exception as e:
         logging.error(f"Database query failed: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
@@ -54,7 +55,7 @@ async def fetch_ingredients(req: IngredientsRequest) -> List[Ingredient]:
     try:
         ingredients_data = json.loads(row["ingredients"])
     except json.JSONDecodeError:
-        raise HTTPException(status_code=500, detail="Corrupt ingredient data")
+        raise HTTPException(status_code=500, detail="Failed to parse ingredient data")
 
     try:
         recipe = Recipe(

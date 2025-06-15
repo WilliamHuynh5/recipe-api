@@ -1,8 +1,8 @@
 1. All units of measurement that are countable, for example "1 egg", "1 slice of bread" are not convertible.
        
-2. Unit of measurement conversions will be made to 2dp.
+2. Unit of measurement conversions will be made to 2 decimal places.
 
 3. Portions are not limited to whole numbers. For example, 1.5 portions is a valid portion size.
 
 4. Mass and Volume cross-conversions should not occur. For example, if a user requests to convert 100g of chicken (mass) to "ml" (volume), the conversion should not happen.
-    -> Technically this can still be supported, but it doesn't make a lot of sense. i.e. 1KG of Chicken != 1 Liter of Chicken (at least in the context of recipes)
+    -> Technically this can still be supported, but it doesn't make a lot of sense. i.e. 1KG of Chicken != 1 Litre of Chicken (at least in the context of recipes)

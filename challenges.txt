@@ -1,5 +1,31 @@
-1. Source of truth for units. Should the backend handle conversion or the frontend?
-    -> If the backend, that requires each request to include a preferred
-       metric of measurement. 
+1. Challenges with Idiomatic Python and OOP Design
+    - Coming from a background of backend infrastructure in Golang, there was a definitely a learning curve getting started in Python. 
+      I referred to a lot of FastAPI documentation in order to find a decent way to structure the backend here.
+      I adopted an approach where I split the app into
+        -> model/      (contains the interfaces/classes)
+        -> services/   (contains the functions that handle the business logic)
+        -> tests/      (server level tests for the functions)
+        -> utils/      (additional helper files/types that I thought would be handy)
+        
+    - Additionally, I believe there are idiomatic python methods and functions such as List Comprehension. I definitely wasn't up to date
+      on what the best practices of python were, so there may be some "non-idiomatic" python code.
+      
+    - Python is by default a loosely-typed language, meaning my first instrict here was to type-safe as many of the entities as I could.
+      However it appears that there are no such things as Interfaces in Python, so I was forced to use Classes here. 
+      I'm not too sure if this is the idiomatic approach to making things type safe, however I relied quite heavily on the
+      `pydantic` library
+      
+      
+2. Serialising the Unit data type, and elegantly handling conversions.
+    - One of the challenges here was coming up with a way that balances extensibility but also the simplicity of the data type to handle units and unit conversions.
+      There were two main approaches here, once which was to create an enum for each unit of measurement (mass, volumn, countables), and then create a seperate mapping function
+       that would map the enum to a conversion function/factor. The second approach was to include the conversion factor along with the unit in the enum itself.
+       This means that at any point in code, we are able to obtain the conversion factor directly from the enum itself, without importing a conversion function or object to
+       do it for us.
        
-2. Learning SQL Alchemy and SQL Lite
+       I opted for the second option here, however this lead to issues with serialising. Enums have not been very friendly with serialisation, particularly complex Enums
+       especially in JSON or URL Queries. For this I had to employ the __str__, __repr__ and _missing_ methods to ensure the enum behaves correctly during (de)serialization and lookup.
+       This allows the Enum to be identified by a "code" / "key", which in this case is its metric id (kg, g, ml, l, oz, etc...).
+       
+       If I had more time, I definitely would have looked further into the best practices of handling Enum serialisation, and seeing if there was a more elegant solution around this.
+       

@@ -18,7 +18,7 @@ Ensure you have the following installed:
 
 - Python 3.9 or higher  
 - `pip` package manager
-
+- Linux/WSL Environment
 ---
 
 ### 2. Create a Virtual Environment
@@ -34,8 +34,6 @@ Create an isolated Python environment to manage dependencies:
 Activate your virtual environment:
 
 `source venv/bin/activate`
-
-> For Windows, use: `venv\Scripts\activate`
 
 ---
 

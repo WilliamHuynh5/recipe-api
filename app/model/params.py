@@ -4,6 +4,9 @@ from enum import Enum
 
 from app.model.ingredient.ingredient import Unit
 
+"""
+Request and parameter models for recipe and ingredient API endpoints.
+"""
 
 T = TypeVar("T")
 

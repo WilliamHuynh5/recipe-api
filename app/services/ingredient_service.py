@@ -15,7 +15,26 @@ from fastapi import HTTPException
 import json
 import logging
 
+"""
+Retrieve and process the list of ingredients for a given recipe based on the request parameters.
 
+This function performs the following steps:
+- Validates that a recipe ID is provided.
+- Queries the database to fetch the recipe row matching the given recipe ID.
+- Parses the stored JSON-encoded ingredients data.
+- Constructs a Recipe model including its ingredients.
+- Optionally adjusts the recipe's portions if `desired_portions` is specified.
+- Optionally converts ingredient units for mass and volume as specified by `mass_unit` and `volume_unit`.
+- Returns the list of processed Ingredient objects.
+
+Raises:
+    HTTPException 400: If the recipe ID is missing or if invalid unit conversion is attempted.
+    HTTPException 404: If no recipe is found with the given ID.
+    HTTPException 500: For database errors, JSON parsing errors, or any unexpected errors during processing.
+
+Returns:
+    List[Ingredient]: A list of Ingredient models representing the processed ingredients for the recipe.
+"""
 async def fetch_ingredients(req: IngredientsRequest) -> List[Ingredient]:
     if not req.recipe_id:
         raise HTTPException(status_code=400, detail="Recipe ID must be provided")

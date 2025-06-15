@@ -26,8 +26,8 @@ class SortOrder(str, Enum):
 
 
 class SortOptions(BaseModel):
-    field: str
-    order: SortOrder = SortOrder.ASC
+    field: Optional[str] = None
+    order: Optional[SortOrder] = SortOrder.ASC
 
 
 class FilterOptions(BaseModel):

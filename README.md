@@ -7,8 +7,7 @@ During marking, please refer to these following files:
 - `challenges.txt` - A list of technical challenges encountered throughout this project
 
 ## 🚀 Project Overview
-
-The Recipe API provides a simple and efficient way to manage recipe information through RESTful endpoints. It is designed for easy local development and testing with FastAPI’s automatic documentation and hot-reload capabilities.
+A simple Recipe API that returns a list of recipes, ingredients and provides options for unit conversion and portion sizes.
 
 ## 🛠️ Setup Instructions
 

@@ -1,5 +1,6 @@
 import json
 from typing import Optional
+from fastapi import HTTPException
 from sqlalchemy import select, desc, asc, func
 from app.database.database import database
 from app.database.recipe_table import recipe_table
@@ -57,10 +58,17 @@ async def fetch_recipes(
                 for ingredient in json.loads(row["ingredients"])
             ],
         )
-        if req.desired_portions is not None:
-            recipe.reportion(req.desired_portions)
-        if req.desired_unit is not None:
-            recipe.reunit(req.desired_unit)
-        recipes.append(recipe)
+        try:
+            if req.desired_portions is not None:
+                recipe.reportion(req.desired_portions)
+            if req.mass_unit is not None:
+                recipe.reunit(req.mass_unit)
+            if req.volume_unit is not None:
+                recipe.reunit(req.volume_unit)
+            recipes.append(recipe)
+        except ValueError as ve:
+            raise HTTPException(status_code=400, detail=str(ve))
+        except Exception as e:
+            raise HTTPException(status_code=500, detail="Error processing recipe")
 
     return recipes

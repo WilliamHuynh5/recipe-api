@@ -10,6 +10,11 @@ class Recipe(BaseModel):
     ingredients: List[Ingredient]
 
     def reunit(self, target_unit: Unit):
+        if not isinstance(target_unit, Unit):
+            raise ValueError(
+                f"Invalid target_unit: expected Unit enum, got {type(target_unit)}"
+            )
+
         for ingredient in self.ingredients:
             ingredient.to_unit(target_unit)
 

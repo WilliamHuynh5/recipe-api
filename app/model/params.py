@@ -1,5 +1,4 @@
 from typing import TypeVar, Optional
-from fastapi import Query
 from pydantic import BaseModel
 from enum import Enum
 
@@ -33,11 +32,13 @@ class FilterOptions(BaseModel):
 
 
 class RecipesRequest(BaseModel):
-    desired_portions: Optional[float] = (Query(None),)
-    desired_unit: Optional[Unit] = (Query(None),)
+    desired_portions: Optional[float] = None
+    mass_unit: Optional[Unit] = None
+    volume_unit: Optional[Unit] = None
 
 
 class IngredientsRequest(BaseModel):
     recipe_id: str
     desired_portions: Optional[float] = None
-    desired_unit: Optional[Unit] = None
+    mass_unit: Optional[Unit] = None
+    volume_unit: Optional[Unit] = None

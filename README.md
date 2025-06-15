@@ -67,5 +67,12 @@ Try out this sample route!
 
 http://127.0.0.1:8000/ingredients?recipe_id=r2&desired_portions=10
 
-> Highly reccomneded to use a API Client like `Postman` to invoke the API
+> Highly reccomended to use a API Client like `Postman` to invoke the API
 
+**`/recipes` route:**
+
+https://.postman.co/workspace/My-Workspace~69baad4f-6d85-4ff0-8c44-e3dad326618e/request/21722913-360401b5-0869-4807-8df7-6d59c879c859?action=share&creator=21722913&ctx=documentation
+
+**`/ingredients` route:**
+
+https://.postman.co/workspace/My-Workspace~69baad4f-6d85-4ff0-8c44-e3dad326618e/request/21722913-8377459e-8914-4b50-a5b8-5387aa6e0021?action=share&creator=21722913&ctx=documentation

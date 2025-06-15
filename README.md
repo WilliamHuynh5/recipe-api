@@ -78,3 +78,9 @@ https://.postman.co/workspace/My-Workspace~69baad4f-6d85-4ff0-8c44-e3dad326618e/
 
 https://github.com/user-attachments/assets/c236f5d3-28b4-4167-b4b7-8c19e83036b1
 
+### 7. Run unit tests
+
+```
+pytest
+```
+

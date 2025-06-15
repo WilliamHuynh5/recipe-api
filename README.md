@@ -72,11 +72,15 @@ http://127.0.0.1:8000/ingredients?recipe_id=r2&desired_portions=10
 
 https://.postman.co/workspace/My-Workspace~69baad4f-6d85-4ff0-8c44-e3dad326618e/request/21722913-360401b5-0869-4807-8df7-6d59c879c859?action=share&creator=21722913&ctx=documentation
 
+https://github.com/user-attachments/assets/c236f5d3-28b4-4167-b4b7-8c19e83036b1
+
 **`/ingredients` route:**
 
 https://.postman.co/workspace/My-Workspace~69baad4f-6d85-4ff0-8c44-e3dad326618e/request/21722913-8377459e-8914-4b50-a5b8-5387aa6e0021?action=share&creator=21722913&ctx=documentation
 
-https://github.com/user-attachments/assets/c236f5d3-28b4-4167-b4b7-8c19e83036b1
+https://github.com/user-attachments/assets/e8788463-95ed-4856-bab4-7e4083e745ba
+
+
 
 ### 7. Run unit tests
 
